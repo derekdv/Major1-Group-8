@@ -6,18 +6,19 @@ int main() {
 
     while (1) {
         printf("\nEnter the menu option for the operation to perform:\n");
-        printf("    1. Rotate-right\n");
-        printf("    2. Parity\n");
-        printf("    3. EXIT\n");
+        printf("    1. Count Leading Zeros\n");
+        printf("    2. Rotate-right\n");
+        printf("    3. Parity\n");
+        printf("    4. EXIT\n");
         printf("--> ");
         scanf("%d", &option);
 
-        if (option == 3) {
+        if (option == 4) {
             printf("Goodbye.\n");
             break;
         }
 
-        if (option < 1 || option > 3) {
+        if (option < 1 || option > 4) {
             printf("Invalid option.\n");
             continue;
         }
@@ -28,17 +29,21 @@ int main() {
         } while (number < 1 || number > 4294967295);
 
         if (option == 1) {
+            int result = count_leading_zeros(number);
+            printf("The number of leading zeroes in %u is %d\n", number, result);
+        } else if (option == 2) {
             do {
                 printf("Enter the number of positions to rotate-right (0–31): ");
                 scanf("%u", &amount);
             } while (amount > 31);
-
             uint32_t result = rotate_right(number, amount);
             printf("%u rotated by %u gives: %u\n", number, amount, result);
-        } else if (option == 2) {
+        } else if (option == 3) {
             printf("Parity of %u is %s\n", number, parity(number) ? "odd (1)" : "even (0)");
         }
     }
 
     return 0;
+}
+
 }
