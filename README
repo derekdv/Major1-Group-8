@@ -1,0 +1,21 @@
+newshell - A custom shell written in C
+
+Contributors:
+- Priscilla Osineye (Main shell engine, parsing, forking, execution, built-in command cd)
+- Teammate B
+- Teammate C
+
+Features:
+- Command parsing and execution
+- Built-in commands: cd, exit
+- Fork-exec model for external commands
+
+Build Instructions:
+$ make
+
+Run:
+$ ./newshell
+
+Usage:
+- Run programs like: ls, pwd, echo "Hello"
+- Use built-ins: cd <path>, exit
