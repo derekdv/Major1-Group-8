@@ -1,4 +1,3 @@
-
 CC = gcc
 CFLAGS = -Wall -g
 TARGET = newshell
@@ -17,6 +16,3 @@ builtins.o: builtins.c builtins.h
 
 clean:
 	rm -f *.o $(TARGET)
-
-
-
