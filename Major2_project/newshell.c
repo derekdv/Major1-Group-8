@@ -1,0 +1,56 @@
+/*================== newshell.c ==================*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include "builtins.h"
+
+#define MAX_LINE 1024
+#define MAX_ARGS 64
+
+void parse_input(char *line, char **args) {
+    int i = 0;
+    args[i] = strtok(line, " 	\n");
+    while (args[i] != NULL && i < MAX_ARGS - 1) {
+        args[++i] = strtok(NULL, " 	\n");
+    }
+    args[i] = NULL;
+}
+
+int main() {
+    char line[MAX_LINE];
+    char *args[MAX_ARGS];
+
+    while (1) {
+        printf("newshell> ");
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            perror("fgets");
+            continue;
+        }
+
+        parse_input(line, args);
+        if (args[0] == NULL) continue;  // empty input
+
+        // Check for built-in commands
+        if (is_builtin(args[0])) {
+            run_builtin(args);
+            continue;
+        }
+
+        // Fork & exec external command
+        pid_t pid = fork();
+        if (pid < 0) {
+            perror("fork");
+        } else if (pid == 0) {
+            execvp(args[0], args);
+            perror("execvp");
+            exit(EXIT_FAILURE);
+        } else {
+            wait(NULL);  // Parent waits
+        }
+    }
+
+    return 0;
+  
+}
