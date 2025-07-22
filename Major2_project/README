@@ -1,16 +1,17 @@
 
 CSCE 3600: Major Assignment 2
 
-
 Contributors:
 - Priscilla Osineye (Main shell engine, parsing, forking, execution, built-in command cd)
-- 
+- Derek Valencia (Implemented built-in commands: path, myhistory; path environment list management; command history with re-execution support)
 - 
 
 Features:
 - Command parsing and execution
-- Built-in commands: cd, exit
+- Built-in commands: cd, exit, path, myhistory
 - Fork-exec model for external commands
+- Custom path management (add/remove/display)
+- Command history (last 20 commands with -c and -e options)
 
 Build Instructions:
 $ make
@@ -20,5 +21,10 @@ $ ./newshell
 
 Usage:
 - Run programs like: ls, pwd, echo "Hello"
-- Use built-ins: cd <path>, exit
-
+- Use built-ins: 
+  - cd <path>
+  - exit
+  - path [+|- <path>]
+  - myhistory
+  - myhistory -c (clear)
+  - myhistory -e <n> (re-execute)
